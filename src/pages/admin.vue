@@ -1,11 +1,11 @@
 <template>
     <v-container grid-list-md fluid>
         <v-layout row wrap v-if="token != ''">
-            <v-flex md2 xs4 sm4>
+            <v-flex md2 xs12 sm12>
                 <AdminDrawer></AdminDrawer>
             </v-flex>
 
-            <v-flex md2 xs4 sm4>
+            <v-flex md10 xs12 sm12>
                 <router-view></router-view>
             </v-flex>
         </v-layout>

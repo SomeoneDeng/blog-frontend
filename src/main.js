@@ -36,8 +36,8 @@ const store = new Vuex.Store({
 })
 
 
-Vue.prototype.$url = "http://localhost:9001"
-// Vue.prototype.$url = "https://shirakamifubuki.com"
+// Vue.prototype.$url = "http://localhost:9001"
+Vue.prototype.$url = "https://shirakamifubuki.com"
 // Vue.prototype.$token = ''
 new Vue({
   router,

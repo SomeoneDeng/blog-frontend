@@ -1,28 +1,32 @@
 <template>
     <v-container grid-list-md fluid fill-height align-start>
         <v-layout row wrap>
-            <v-flex md8 sm12 xs12>
-                <v-progress-linear color="teal" :indeterminate="true" v-if="loading"></v-progress-linear>
-                <v-list subheader grid-list-sm >
-                    <v-hover v-for="item in items" :key="item.title" style="cursor: pointer;" >
-                        <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" color="#ffffff"  style="margin-bottom:20px;" @click="toArticle(item.aid)">
-                            <v-card-title primary-title >
-                            <v-container fluid grid-list-xs>
-                                <h3 class="headline mb-0 teal--text">{{item.title}}</h3>
-                                <v-divider></v-divider>
-                                <div style="margin-top:10px;overflow:hidden; white-space:nowrap; text-overflow:ellipsis"> {{ item.description }} </div>
-                            </v-container>
-                            </v-card-title>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-chip color="teal darken-1" small text-color="white">{{dateFormate(item.created)}}</v-chip>
-                            </v-card-actions>
-                        </v-card>
-                    </v-hover>
-                </v-list>
-            </v-flex>
-            <v-flex md4 sm12 xs12>
-                <CategoryList :catePage=true v-on:GetArticle="getArticle"></CategoryList>
+            <v-flex md8 offset-md2>
+                <v-layout row wrap>
+                    <v-flex md8 sm12 xs12>
+                        <v-progress-linear color="teal" :indeterminate="true" v-if="loading"></v-progress-linear>
+                        <v-list subheader grid-list-sm >
+                            <v-hover v-for="item in items" :key="item.title" style="cursor: pointer;" >
+                                <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" color="#ffffff"  style="margin-bottom:20px;" @click="toArticle(item.aid)">
+                                    <v-card-title primary-title >
+                                    <v-container fluid grid-list-xs>
+                                        <h3 class="headline mb-0 teal--text">{{item.title}}</h3>
+                                        <v-divider></v-divider>
+                                        <div style="margin-top:10px;overflow:hidden; white-space:nowrap; text-overflow:ellipsis"> {{ item.description }} </div>
+                                    </v-container>
+                                    </v-card-title>
+                                    <v-card-actions>
+                                        <v-spacer></v-spacer>
+                                        <v-chip color="teal darken-1" small text-color="white">{{dateFormate(item.created)}}</v-chip>
+                                    </v-card-actions>
+                                </v-card>
+                            </v-hover>
+                        </v-list>
+                    </v-flex>
+                    <v-flex md4 sm12 xs12>
+                        <CategoryList :catePage=true v-on:GetArticle="getArticle"></CategoryList>
+                    </v-flex>
+                </v-layout>
             </v-flex>
         </v-layout>
     </v-container>
