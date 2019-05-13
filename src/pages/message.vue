@@ -1,6 +1,6 @@
 <template>
-    <v-container grid-list-md fill-height align-start>
-        <v-layout row wrap justify-start align-start>  
+    <!-- <v-container grid-list-md fill-height> -->
+        <v-layout row wrap>  
             <v-progress-linear color="teal" :indeterminate="true" v-if="loading.friend"></v-progress-linear>
             <v-flex md8 xs12 sm12 offset-md2 v-if="!loading.friend">
                 <h4 class="display-0 teal--text">好友(排名不分先后)</h4>
@@ -62,27 +62,27 @@
                 <!-- </v-flex> -->
                 <v-spacer></v-spacer>
             </v-flex>
+            <v-menu open-on-hover top offset-y>
+                <template v-slot:activator="{ on }">
+                    <v-btn
+                    color="pink"
+                    fixed
+                    dark
+                    v-on="on"
+                    right
+                    bottom
+                    fab>
+                    <v-icon>add</v-icon>
+                    </v-btn>
+                </template>
+                <v-list>
+                    <v-btn color="success" @click="()=>{messageDialog = true}">留言</v-btn>
+                </v-list>
+            </v-menu>
+            <MessageDialog v-bind:dialog="messageDialog" v-on:close="messageDialogClose"></MessageDialog>
         </v-layout>
         
-        <v-menu open-on-hover top offset-y>
-            <template v-slot:activator="{ on }">
-                <v-btn
-                color="pink"
-                fixed
-                dark
-                v-on="on"
-                right
-                bottom
-                fab>
-                <v-icon>add</v-icon>
-                </v-btn>
-            </template>
-            <v-list>
-                <v-btn color="success" @click="()=>{messageDialog = true}">留言</v-btn>
-            </v-list>
-        </v-menu>
-        <MessageDialog v-bind:dialog="messageDialog" v-on:close="messageDialogClose"></MessageDialog>
-    </v-container>
+    <!-- </v-container> -->
 </template>
 
 <script>

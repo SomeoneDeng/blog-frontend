@@ -1,7 +1,7 @@
 <template>
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
     stateless
-    value="true">
+    value="true"> -->
     <v-list>
       <v-list-tile @click="()=>{$router.push('/')}">
         <v-list-tile-action>
@@ -52,7 +52,7 @@
         </v-list-tile>
       </v-list-group>
     </v-list>
-  </v-navigation-drawer>
+  <!-- </v-navigation-drawer> -->
 </template>
 
 <script>
