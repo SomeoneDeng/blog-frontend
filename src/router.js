@@ -13,6 +13,7 @@ import Admin from "./pages/admin.vue"
 import ArticlePublish from './components/admin/ArticlePublish.vue'
 import ArticleTable from './components/admin/ArticleTable.vue'
 import CategoryPanel from './components/admin/CategoryPanel.vue'
+import HitokotoList from './components/admin/HitokotoList.vue'
 
 Vue.use(VueRouter);
 
@@ -20,12 +21,18 @@ const routes = [
 	{
 		path: '/',
 		name: 'index',
-		component: Index
+        component: Index,
+        meta: {
+            title: 'Fubuki'
+        }
     },
     {
         path: '/archive',
         name:'archive',
-        component: Archive
+        component: Archive,
+        meta: {
+            title: '归档'
+        }
     },
     {
         path: '/article',
@@ -45,7 +52,10 @@ const routes = [
     {
         path: '/message',
         name:'message',
-        component: Message
+        component: Message,
+        meta: {
+            title: '留言'
+        }
     },
     {
         path: '/about',
@@ -70,8 +80,8 @@ const routes = [
                 component: CategoryPanel
             },
             {
-                path: 'article-table',
-                component: ArticleTable
+                path: 'hitokoto-list',
+                component: HitokotoList
             }
         ]
     }

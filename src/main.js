@@ -21,16 +21,19 @@ Vue.use(Vuex)
 // 全局变量
 const store = new Vuex.Store({
   state: {
-    token: ''
+    token: '',
+    uncheckHitokoTo: []
   },
   getters: {
-    userToken: state => {
-      return state.token
-    }
+    userToken: state => state.token,
+    uncheckHitokoTo: state => state.uncheckHitokoTo
   },
   mutations: {
     userToken (state, token) {
       state.token = token
+    },
+    uncheckHitokoTo (state, uncheckHitokoTo) {
+      state.uncheckHitokoTo = uncheckHitokoTo
     }
   }
 })

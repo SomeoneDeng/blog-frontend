@@ -64,7 +64,7 @@
         ['分类', 'category', '/admin/category-panel']
       ],
       others: [
-        ['一言', 'message', '/admin/'],
+        ['一言', 'message', '/admin/hitokoto-list'],
         ['友联', 'people_outline', '/admin/'],
         ['留言', 'question_answer', '/admin/'],
         ['设置', 'build', '/admin/']
