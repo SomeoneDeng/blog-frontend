@@ -4,6 +4,8 @@
             <v-flex md10 offset-md1>
                 <v-toolbar flat color="white">
                 <v-toolbar-title>一言</v-toolbar-title>
+                <v-spacer></v-spacer>
+                <button  @click="checkall" color="success">CheckAll</button>
                 </v-toolbar>
                 <v-data-table
                     :headers="headers"
@@ -33,6 +35,7 @@
 <script>
 import Axios from 'axios';
 import { log } from 'util';
+import { mapState,mapMutations } from 'vuex'
 export default {
     data() {
         return {
@@ -43,16 +46,19 @@ export default {
                 { text: 'comes', value: 'comes' },
                 { text: 'created', value: 'createdAt' },        
             ],
-            uncheckKotos: this.$store.getters.uncheckHitokoTo  
         }
     },
     computed: {
-      
+        ...mapState({
+            uncheckKotos: state=>state.uncheckHitokoTo,
+            token : state => state.token
+        })
     },
     mounted() {
         this.getUnCheckKotos()
     },
     methods: {
+        ...mapMutations(['deleteHitokoto','uncheckHitokoTo']),
         getUnCheckKotos: function () {
             var that = this
             // 这样不会每次都请求
@@ -61,31 +67,33 @@ export default {
                     url: that.$url + '/api/hitokoto/get/closed',
                     method: 'get',
                     headers: {
-                        'authorization' : that.$store.getters.userToken
+                        'authorization' : that.token
                     }
                 }).then(resp => {
                     log(resp.data)
-                    that.$store.commit('uncheckHitokoTo', resp.data.data)
-                    that.uncheckKotos = that.$store.getters.uncheckHitokoTo
+                    that.uncheckHitokoTo(resp.data.data)  
                 })
             }
         },
         checKoto: function (id) {
-            log('checking...'+id)
             var that = this
             Axios({
                 url : that.$url + '/api/hitokoto/check?id='+id + "&check=true",
                 method : 'get',
                 headers : {
-                    'authorization' : that.$store.getters.userToken
+                    'authorization' : that.token
                 }
             }).then(resp => {
                 if (resp.data.status === 200) {
-                    log(resp.data)
-                    that.uncheckKotos = that.uncheckKotos.filter(k => k.id != id)
+                    that.deleteHitokoto(id)
                 }
-                that.getUnCheckKotos()
             })
+        },
+        checkall: function () {
+            var that = this
+            that.uncheckKotos.forEach(k => {
+                that.checKoto(k.id)
+            });     
         }
     },
 }

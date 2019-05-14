@@ -38,13 +38,12 @@ export default {
     toolBtns: [
           { title: 'Home', icon: 'home' , to: '/'},
           { title: '归档', icon: 'archive', to: '/archive' },
-          // { title: '好友', icon: 'people' , to: '/friends'},
           { title: '留言', icon: 'message' , to: '/message'},
           { title: '关于', icon: 'info', to: '/about' }
         ],
   }),
   mounted: function () {
-    // this.drawer = !this.drawer
+    
   }
 }
 </script>

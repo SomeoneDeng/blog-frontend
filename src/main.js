@@ -2,8 +2,8 @@ import Vue from 'vue'
 import './plugins/axios'
 import App from './App.vue'
 import router from './router'
-import Vuex from 'vuex'
-
+import store from './store'
+// import Vuex from 'vuex'
 Vue.config.productionTip = false
 import '@mdi/font/css/materialdesignicons.css'
 import Vuetify from 'vuetify'
@@ -16,30 +16,9 @@ Vue.use(Vuetify,{
     'link': 'mdi-link',
   }
 })
-Vue.use(Vuex)
-
-// 全局变量
-const store = new Vuex.Store({
-  state: {
-    token: '',
-    uncheckHitokoTo: []
-  },
-  getters: {
-    userToken: state => state.token,
-    uncheckHitokoTo: state => state.uncheckHitokoTo
-  },
-  mutations: {
-    userToken (state, token) {
-      state.token = token
-    },
-    uncheckHitokoTo (state, uncheckHitokoTo) {
-      state.uncheckHitokoTo = uncheckHitokoTo
-    }
-  }
-})
-
 
 // Vue.prototype.$url = "http://localhost:9001"
+Vue.prototype.$store = store
 Vue.prototype.$url = "https://shirakamifubuki.com"
 // Vue.prototype.$token = ''
 new Vue({

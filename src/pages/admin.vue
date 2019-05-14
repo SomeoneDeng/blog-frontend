@@ -17,6 +17,7 @@
 import LoginPanel from '../components/LoginPanel.vue'
 import AdminDrawer from '../components/admin/AdminDrawer.vue'
 import { log } from 'util';
+import { mapState, mapMutations } from 'vuex'
 export default {
     components:{
         LoginPanel,
@@ -25,9 +26,10 @@ export default {
     data(){
         return {
             loginShow: false,
-            token: this.$store.getters.userToken
+            // token: this.$store.getters.userToken
         }
     },
+    
     mounted: function () {
         log('admin page token: ',this.token)
         if (this.token === '' || this.token === undefined) {
@@ -35,13 +37,19 @@ export default {
             this.loginShow = true
         }
     },
+    computed: {
+        ...mapState({
+            token: state => state.token
+        }),
+    },
     methods: {
+        ...mapMutations(['setUserToken']),
         closeLogin: function (token) {
             log('login panel closed')
             this.loginShow = false
             if (token != '' ) {
                 this.token = token
-                this.$store.commit('userToken', token)
+                this.setUserToken(token)
             }else{
                 this.$router.push('/')
             }
