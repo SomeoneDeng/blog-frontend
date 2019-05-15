@@ -65,6 +65,7 @@
 <script>
 import Axios from 'axios';
 import { log } from 'util';
+import { mapState } from 'vuex'
 export default {
     data() {
         return {
@@ -82,6 +83,11 @@ export default {
             publishState:0,      
         }
     },
+    computed: {
+        ...mapState({
+            token : state => state.token
+        })
+    },
     mounted: function () {
         this.getCategorys()
     },
@@ -96,7 +102,7 @@ export default {
                 method: "post",
                 url: that.$url + '/api/article/add',
                 headers:{
-                    'authorization' : that.$store.getters.userToken
+                    'authorization' : that.token
                 },
                 data:{
                     title: that.article.title,
@@ -135,7 +141,7 @@ export default {
                 method: 'get',
                 url: that.$url + '/api/category/all',
                 headers: {
-                    'authorization' : that.$store.getters.userToken
+                    'authorization' : that.token
                 },
             }).then(resp => that.categories = resp.data.data)
         }
