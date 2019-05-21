@@ -67,6 +67,7 @@
         ['一言', 'message', '/admin/hitokoto-list'],
         ['友联', 'people_outline', '/admin/'],
         ['留言', 'question_answer', '/admin/'],
+        ['上传', 'file', '/admin/upload'],
         ['设置', 'build', '/admin/']
       ]
     })

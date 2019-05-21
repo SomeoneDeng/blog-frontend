@@ -13,6 +13,7 @@ import Admin from "./pages/admin.vue"
 import ArticlePublish from './components/admin/ArticlePublish.vue'
 import ArticleTable from './components/admin/ArticleTable.vue'
 import CategoryPanel from './components/admin/CategoryPanel.vue'
+import UploadPanel from './components/admin/UploadPanel.vue'
 import HitokotoList from './components/admin/HitokotoList.vue'
 
 Vue.use(VueRouter);
@@ -82,6 +83,10 @@ const routes = [
             {
                 path: 'hitokoto-list',
                 component: HitokotoList
+            },
+            {
+                path: 'upload',
+                component: UploadPanel
             }
         ]
     }
