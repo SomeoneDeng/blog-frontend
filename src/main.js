@@ -7,6 +7,7 @@ import store from './store'
 Vue.config.productionTip = false
 import '@mdi/font/css/materialdesignicons.css'
 import Vuetify from 'vuetify'
+import uploader from 'vue-simple-uploader'
 Vue.use(Vuetify,{
   iconfont: 'mdi',
   icons: {
@@ -16,7 +17,7 @@ Vue.use(Vuetify,{
     'link': 'mdi-link',
   }
 })
-
+Vue.use(uploader)
 // Vue.prototype.$url = "http://localhost:9001"
 Vue.prototype.$store = store
 Vue.prototype.$url = "https://shirakamifubuki.com"

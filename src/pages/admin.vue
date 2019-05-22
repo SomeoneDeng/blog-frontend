@@ -48,7 +48,7 @@ export default {
             log('login panel closed')
             this.loginShow = false
             if (token != '' ) {
-                this.token = token
+                // this.token = token
                 this.setUserToken(token)
             }else{
                 this.$router.push('/')
