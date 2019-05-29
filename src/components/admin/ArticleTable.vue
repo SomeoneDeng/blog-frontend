@@ -46,6 +46,7 @@
 
 <script>
 import Axios from 'axios';
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -66,6 +67,11 @@ export default {
       order:'asc'
     }
   },
+  computed: {
+    ...mapState({
+        token : state => state.token
+    })
+  },
   mounted() {
     this.getArticlePage()
   },
@@ -83,7 +89,7 @@ export default {
           that.pageSize +
           '/order/aid/direct/'+that.order,
         headers : {
-          'authorization' : that.$store.getters.userToken
+          'authorization' : that.token
         }
       }).then(resp => {
         if (resp.status === 200) {
@@ -107,7 +113,7 @@ export default {
       Axios({
         url: that.$url + "/api/article/del",
         headers:{
-          'authorization': that.$store.getters.userToken
+          'authorization': that.token
         },
         data:{
           id: that.deleteTarget

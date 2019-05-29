@@ -10,7 +10,7 @@
                 </v-card-title>
                 <v-layout row wrap>
                     <v-flex  md10 offset-md1 xs12 sm12> 
-                        <uploader :options="uploadOptions" :files-submitted="onSubmitted" class="uploader-example">
+                        <uploader :options="uploadOptions" :files-submitted="onSubmitted"  class="uploader-example">
                             <uploader-unsupport></uploader-unsupport>
                             <uploader-drop>
                                 <p>拖拽文件到这里，或</p>
