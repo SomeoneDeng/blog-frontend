@@ -38,9 +38,7 @@
                         <v-card >
                             <v-card-title class="title">{{item.name}}</v-card-title>
                             <v-subheader>{{getDate(item.created)}}</v-subheader>
-                            <v-card-text>
-                                <vue-markdown :source="item.content">
-                                </vue-markdown>
+                            <v-card-text v-html="item.content">           
                             </v-card-text>
                            <v-card-actions>
                                 <v-snackbar
@@ -76,7 +74,7 @@
                     </v-btn>
                 </template>
                 <v-list>
-                    <v-btn color="success" @click="()=>{messageDialog = true}">留言</v-btn>
+                    <v-btn color="success" @click="()=>{messageDialog = true}">说点什么</v-btn>
                 </v-list>
             </v-menu>
             <MessageDialog v-bind:dialog="messageDialog" v-on:close="messageDialogClose"></MessageDialog>
@@ -87,13 +85,11 @@
 
 <script>
 import Axios from 'axios';
-import VueMarkdown from 'vue-markdown'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 import MessageDialog from '../components/MessagePublisher.vue'
 export default {
     components: {
-        VueMarkdown,
         MessageDialog
     },
     data(){
