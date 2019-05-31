@@ -22,7 +22,7 @@
             <v-spacer v-if="!done"></v-spacer>
             <v-card v-if="done"> 
                 <v-parallax
-                    height="300"
+                    height="500"
                     v-bind:src="article.imageUri" >  
                 </v-parallax>
                 <span class="headline titleText" style="padding-left:4px">   
