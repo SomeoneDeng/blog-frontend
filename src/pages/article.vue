@@ -29,11 +29,7 @@
                         {{article.title}}
                 </span>     
                 <v-card-title>
-                    <div class="card-content" v-html="article.content">
-                        <!-- <vue-markdown :source="article.content">
-                        </vue-markdown> -->
-
-                    </div>
+                    <div class="card-content" v-html="article.content"></div>
                 </v-card-title>
                 <v-card-actions>
                     <v-snackbar
@@ -58,13 +54,9 @@
 <script>
 import { log } from 'util';
 import axios from 'axios'
-// import VueMarkdown from 'vue-markdown'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/atom-one-dark.css'
 export default {
-    // components: {
-    //     VueMarkdown
-    // },
     data(){
         return {
             aid : this.$route.query.aid,

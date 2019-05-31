@@ -17,6 +17,7 @@
                             </v-flex>
                             <v-flex xs12>
                                 <v-textarea
+                                    required
                                     color="teal"
                                     clearable
                                     auto-grow
@@ -50,6 +51,24 @@
                         </v-layout>
                     </v-container>
                     <small class="teal--text">*表示必填</small>
+                    <v-dialog
+                        v-model="dialog"
+                        hide-overlay
+                        persistent
+                        width="300">
+                        <v-card
+                            v-bind:color="dialogClr"
+                            dark>
+                            <v-card-text class="text-lg-center text-md-center text-xs-center">
+                                {{dialogMsg}}
+                            <v-progress-linear v-if="publishState == 1"
+                                indeterminate
+                                color="white"
+                                class="mb-0">
+                            </v-progress-linear>
+                            </v-card-text>
+                        </v-card>
+                    </v-dialog>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -81,12 +100,28 @@ export default {
             },
             // 0 common , 1 publishing , 2 failed , 3 success
             publishState:0,      
+            errMsg: ""
         }
     },
     computed: {
         ...mapState({
             token : state => state.token
-        })
+        }),
+        dialog: function () {
+            return this.publishState != 0
+        },
+        dialogMsg : function () {
+            if (this.publishState === 1) return "发布中"
+            if (this.publishState === 2) return this.errMsg
+            if (this.publishState === 3) return "发布成功"
+            return ""
+        },
+        dialogClr: function () {
+            if (this.publishState === 1) return "primary"
+            if (this.publishState === 2) return "red"
+            if (this.publishState === 3) return "success"
+            return "primary"
+        }
     },
     mounted: function () {
         this.getCategorys()
@@ -96,8 +131,18 @@ export default {
             log(e)
         },
         publish: function () {
+            if (this.publishState === 1) {
+                return
+            }
             this.publishState = 1;
             var that = this
+            if (this.checkArticle()){
+                setTimeout(() => {
+                    that.publishState = 0
+                    that.errMsg = ""
+                }, 3000);
+                return
+            }
             Axios({
                 method: "post",
                 url: that.$url + '/api/article/add',
@@ -128,11 +173,12 @@ export default {
                     that.publishState = 3;
                 }else {
                     that.publishState = 2;
-                    // M.toast({html: '发布失败'});
+                    that.errMsg = resp.msg
                 }
-                setTimeout(function () {
-                    that.publishState = 0;
-                },2000);
+                setTimeout(() => {
+                    that.publishState = 0
+                    that.errMsg = ""
+                }, 3000);
             })
         },
         getCategorys: function () {
@@ -144,6 +190,21 @@ export default {
                     'authorization' : that.token
                 },
             }).then(resp => that.categories = resp.data.data)
+        },
+        // return true if article validate error
+        checkArticle: function () {
+            var that = this
+            if (that.article.title === "" || that.article.title === undefined) {
+                that.publishState = 2
+                that.errMsg = "标题为空"
+                return true
+            }
+            if (that.article.content === "" || that.article.content === undefined) {
+                that.publishState = 2
+                that.errMsg = "内容为空"
+                return true
+            }
+            return false
         }
     }
 }
