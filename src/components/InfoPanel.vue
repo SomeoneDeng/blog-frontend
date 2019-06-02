@@ -16,7 +16,7 @@
                 <v-list-tile >
                     <v-tooltip right>
                         <template v-slot:activator="{ on }">
-                            <v-list-tile-sub-title v-on="on">Coder，喜欢编程，喜欢用代码解决问题后的快感</v-list-tile-sub-title>
+                            <v-list-tile-sub-title v-on="on">Coder，喜欢编程，喜欢用代码解决问题后</v-list-tile-sub-title>
                         </template>
                         <span>Coder，喜欢编程，喜欢用代码解决问题</span>
                     </v-tooltip> 
@@ -47,6 +47,9 @@
                         {{'----' + hitokoto.comes}} 
                     </v-card-text>
                 </v-card>
+            </v-layout>
+            <v-layout row wrap hidden-md-and-up>
+                <h1></h1>
             </v-layout>
         </v-flex>
     </v-layout>

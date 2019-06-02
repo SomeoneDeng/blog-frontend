@@ -3,7 +3,7 @@
     <MainDrawer v-model="drawer"></MainDrawer>
     <v-toolbar color="teal" dark fixed app>
       <v-toolbar-items>
-        <v-btn flat class="hidden-sm-and-down" >Shirakami</v-btn>
+        <v-btn flat class="hidden-sm-and-down" to="/">Shirakami</v-btn>
       </v-toolbar-items>
       <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
