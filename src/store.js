@@ -11,7 +11,8 @@ export default new Vuex.Store({
       topArticles: [],
       categories: [],
       messages: [],
-      friends: []
+      friends: [],
+      archives:[]
     },
     mutations: {
       setUserToken (state, token) {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
       },
       setFriends(state, friends){
         state.friends = friends
+      },
+      setArchives(state, archives){
+        state.archives = archives
       }
     }
 })

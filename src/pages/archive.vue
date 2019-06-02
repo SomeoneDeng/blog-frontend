@@ -21,7 +21,7 @@
                                 v-bind:color="randomColor()"
                                 right
                                 fill-dot
-                                v-for="item in archive" :key="item.date">
+                                v-for="item in archives" :key="item.date">
                                 <v-card>
                                     <v-card-title primary-title>
                                         <div>
@@ -58,13 +58,13 @@
 <script>
 import CategoryList from '../components/CategoryList.vue'
 import Axios from 'axios';
+import { mapState, mapMutations, mapGetters } from 'vuex'
 export default {
     components:{
         CategoryList,
     },
     data(){
         return {
-            archive : {},
             loading : false,
             colors: [ 
                 'red',
@@ -80,6 +80,9 @@ export default {
         }
     },
     computed:{
+        ...mapState({
+            archives: state => state.archives
+        }),
         target () {
             return "#top"
         },
@@ -92,10 +95,12 @@ export default {
         },
     },
     methods:{
+        ...mapMutations(['setArchives']),
         randomColor : function () {
             return this.colors[Math.floor(Math.random() * Math.floor(this.colors.length))]
         },
         getArchive:function () {
+            if(this.archives.length > 0) return
             var that = this
             that.loading = true
             Axios({
@@ -103,7 +108,7 @@ export default {
                 method:'get',
             }).then(resp => {
                 that.loading = false
-                that.archive = resp.data.data
+                that.setArchives(resp.data.data)
             })
         },
         toArticle: function (id) {
