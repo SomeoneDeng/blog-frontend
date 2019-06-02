@@ -7,7 +7,7 @@
                 color="teal"
             ></v-progress-linear>
         <v-list subheader grid-list-sm v-if="!loading">
-            <v-hover v-for="item in items" :key="item.title" style="cursor: pointer;" >
+            <v-hover v-for="item in topArticles" :key="item.title" style="cursor: pointer;" >
                 <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 2}`" color="#ffffff"  style="margin-bottom:8px;" @click="toArticle(item.aid)">
                     <v-card-title primary-title >
                     <v-container fluid grid-list-xs>
@@ -29,8 +29,10 @@
 
 <script>
 import axios from 'axios'
+import { mapState, mapMutations } from 'vuex'
 export default {
     methods:{
+        ...mapMutations(['setTopArticles']),
         dateFormate: function(hisTime){
             hisTime = new Date(hisTime).getTime()
             var now = new Date().getTime(),
@@ -70,20 +72,25 @@ export default {
         },
         getArticle: function () {
             var that = this
+            if (that.topArticles.length > 0) return
             that.loading = true
             axios({
                 url : that.$url + '/api/article/get/page/0/size/10/order/aid/direct/desc/',
                 method:'get'
             }).then(resp=>{
                 that.loading = false
-                that.items = resp.data.data.content
+                that.setTopArticles(resp.data.data.content)
             })
         }
     },
     data(){ return {
-            items: [],
             loading : false
         }
+    },
+    computed: {
+        ...mapState({
+            topArticles: state => state.topArticles
+        }),
     },
     mounted: function () {
         this.getArticle()

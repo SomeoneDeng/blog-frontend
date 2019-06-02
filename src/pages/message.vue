@@ -90,16 +90,21 @@
 <script>
 import Axios from 'axios';
 import hljs from 'highlight.js'
+import { mapState, mapMutations } from 'vuex'
 import 'highlight.js/styles/atom-one-dark.css'
 import MessageDialog from '../components/MessagePublisher.vue'
 export default {
     components: {
         MessageDialog
     },
+    computed: {
+        ...mapState({
+            messages: state => state.messages,
+            friends: state => state.friends
+        }),
+    },
     data(){
         return {
-            friends: [],
-            messages: [],
             snack: {
                 text: '没写这个功能ヾ(≧▽≦*)o',
                 snackbar: false,
@@ -113,6 +118,7 @@ export default {
         }
     },
     methods:{
+        ...mapMutations(['setMessages','setFriends']),
         messageDialogClose: function(data) {
             this.messageDialog = false
             if( data != null || data != undefined){
@@ -126,18 +132,20 @@ export default {
             }
         },
         getFriends: function () {
-            this.loading.friend = true
             var that = this
+            if (that.friends.length > 0) return
+            this.loading.friend = true
             Axios({
                 url: that.$url + '/api/friend/all/checked',
                 method: 'get',
             }).then(resp => {
                 that.loading.friend = false
-                that.friends = resp.data.data
+                that.setFriends(resp.data.data)
             })
         },
         getMessages: function () {
             var that = this
+            if (that.messages.length > 0) return
             that.loading.msg = true
             Axios({
                 url: that.$url + '/api/message/all',
@@ -152,7 +160,7 @@ export default {
                     m.content = m.content.replace("<iframe", 'ir')
                     m.content = m.content.replace("<style", 'sty')
                 })
-                that.messages = resp.data.data
+                that.setMessages(resp.data.data)
             })
         },
         getDate:function(dateStr) {

@@ -26,9 +26,11 @@
 <script>
 import { log } from 'util';
 import axios from 'axios'
+import { mapState, mapMutations } from 'vuex'
 export default {
     props:['catePage','onGetArticle'],
     methods: {
+        ...mapMutations(['setCategories']),
         toCategory: function (to) {
             if (this.catePage) {
                 log('in page: ',to)
@@ -45,25 +47,30 @@ export default {
         },
         getCategory: function () {
             var that = this
+            if (that.categories.length > 0) return
             that.loading = true
             axios({
                 method: 'get',
                 url: that.$url + '/api/category/all',
             }).then(resp=>{
                 that.loading = false
-                that.items = resp.data.data
+                // that.items = resp.data.data
+                that.setCategories(resp.data.data)
             })
         }
     },
     data () {
         return {
-            items: [],
+            // items: [],
             loading: false
         }
     },
     computed:{
+        ...mapState({
+            categories: state => state.categories
+        }),
         nonZeroCate: function () {
-            return this.items.filter(i => i.count > 0)
+            return this.categories.filter(i => i.count > 0)
         }
     },
     mounted : function () {

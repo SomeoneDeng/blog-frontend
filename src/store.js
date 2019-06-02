@@ -7,7 +7,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
       token: '',
-      uncheckHitokoTo: []
+      uncheckHitokoTo: [],
+      topArticles: [],
+      categories: [],
+      messages: [],
+      friends: []
     },
     mutations: {
       setUserToken (state, token) {
@@ -18,6 +22,18 @@ export default new Vuex.Store({
       },
       deleteHitokoto (state, id) {
         state.uncheckHitokoTo = state.uncheckHitokoTo.filter(k => k.id != id)
+      },
+      setTopArticles(state, articles) {
+        state.topArticles = articles
+      },
+      setCategories(state, categories){
+        state.categories = categories;
+      },
+      setMessages(state, messages){
+        state.messages  = messages
+      },
+      setFriends(state, friends){
+        state.friends = friends
       }
     }
 })

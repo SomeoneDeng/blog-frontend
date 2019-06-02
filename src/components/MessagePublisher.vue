@@ -22,13 +22,13 @@
                 <v-text-field v-model="msg.name" color="teal lighten-2" label="尊姓大名" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="msg.mail"  color="teal lighten-2"  label="邮箱" ></v-text-field>
+                <v-text-field v-model="msg.mail"  color="teal lighten-2"  label="邮箱" hint="非必要" ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="msg.link"  color="teal lighten-2"  label="网站" type="text"></v-text-field>
+                <v-text-field v-model="msg.link"  color="teal lighten-2"  label="网站" hint="非必要" type="text"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="msg.image"  color="teal lighten-2"  label="头像链接" type="text"></v-text-field>
+                <v-text-field v-model="msg.image"  color="teal lighten-2"  label="头像链接" hint="非必要" type="text"></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-textarea
@@ -44,6 +44,8 @@
                 <v-text-field
                   name="name"
                   label="验证码"
+                  color="teal"
+                  hint="点击刷新验证码"
                   id="id"
                   v-model="checkcode"
                 ></v-text-field>
