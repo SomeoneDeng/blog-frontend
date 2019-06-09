@@ -20,7 +20,7 @@ Vue.use(Vuetify,{
 Vue.use(uploader)
 // Vue.prototype.$url = "http://localhost:9001"
 Vue.prototype.$store = store
-Vue.prototype.$url = "https://shirakamifubuki.com"
+Vue.prototype.$url = "https://www.fbkfox.com"
 // Vue.prototype.$token = ''
 new Vue({
   router,

@@ -48,9 +48,6 @@
                     </v-card-text>
                 </v-card>
             </v-layout>
-            <v-layout row wrap hidden-md-and-up>
-                <h1></h1>
-            </v-layout>
         </v-flex>
     </v-layout>
 </template>

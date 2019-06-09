@@ -58,7 +58,7 @@
 <script>
 import CategoryList from '../components/CategoryList.vue'
 import Axios from 'axios';
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 export default {
     components:{
         CategoryList,
