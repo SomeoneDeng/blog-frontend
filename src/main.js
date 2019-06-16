@@ -8,6 +8,8 @@ Vue.config.productionTip = false
 import '@mdi/font/css/materialdesignicons.css'
 import Vuetify from 'vuetify'
 import uploader from 'vue-simple-uploader'
+import vcolorpicker from 'vcolorpicker'
+Vue.use(vcolorpicker)
 Vue.use(Vuetify,{
   iconfont: 'mdi',
   icons: {
@@ -20,7 +22,7 @@ Vue.use(Vuetify,{
 Vue.use(uploader)
 // Vue.prototype.$url = "http://localhost:9001"
 Vue.prototype.$store = store
-Vue.prototype.$url = "https://www.fbkfox.com"
+Vue.prototype.$url = "https://shirakamifubuki.com"
 // Vue.prototype.$token = ''
 new Vue({
   router,
