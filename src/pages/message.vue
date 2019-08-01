@@ -88,7 +88,7 @@
 </template>
 
 <style>
-    .v-content img {
+    .v-timeline-item__body img {
         width: 100%;
     }
 </style>
