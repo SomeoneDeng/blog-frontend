@@ -87,6 +87,13 @@
     <!-- </v-container> -->
 </template>
 
+<style>
+    .v-content img {
+        width: 100%;
+    }
+</style>
+
+
 <script>
 import Axios from 'axios';
 import hljs from 'highlight.js'
