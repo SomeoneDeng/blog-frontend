@@ -20,6 +20,44 @@
                         </uploader>
                     </v-flex>
                 </v-layout>
+                
+            </v-card>
+        </v-flex>
+
+        <v-flex md10 offset-md1 xs12 sm12>
+            <v-card>
+                <v-card-title primary-title>
+                    <v-layout row wrap>
+                        <v-flex md11 xs10 sm10>
+                            <div class="headline mb-0">文件列表</div>
+                        </v-flex>
+                        <v-flex md1  xs2 sm2>
+                            <v-btn small color="primary" @click="getDir">刷新</v-btn>
+                        </v-flex>
+                    </v-layout>
+                </v-card-title>
+                <v-data-table
+                    :headers="headers"
+                    :items="files"
+                    sort
+                    :loading="loading"
+                    item-key="Id">
+                <template v-slot:items="props">
+                    <tr @click="props.expanded = !props.expanded">
+                    <td class="text-md-center text-xs-center text-sm-center">{{ props.item.Id }}</td>
+                    <td class="text-md-center text-xs-center text-sm-center">{{ props.item.Name }}</td>
+                    <td class="text-md-center text-xs-center text-sm-center">{{ props.item.Md5 }}</td>
+                    <td class="text-md-center text-xs-center text-sm-center">{{ props.item.Path }}</td>
+                    <td class="text-md-center text-xs-center text-sm-center"><a :href="props.item.Download" target="blank">下载</a></td>
+                    </tr>
+                </template>
+                <!-- <template v-slot:expand="props">
+                    <v-card flat dense>
+                    <v-btn block color="error" dark @click="deleteDialog(props.item.aid)">删除</v-btn>
+                    <v-btn block color="orange" dark>编辑</v-btn>
+                    </v-card>
+                </template>  -->
+                </v-data-table>
             </v-card>
         </v-flex>
     </v-layout>
@@ -37,7 +75,16 @@ export default {
                 fileParameterName: 'file',
                 testChunks: false,
                 fileAdded: this.onFileAdded
-            }      
+            },
+            headers: [
+                { text: 'Id', value: 'id' },
+                { text: '文件名', value: 'Name' },
+                { text: 'Md5', value: 'Md5' },
+                { text: '文件路径', value: 'Path' },
+                { text: '下载', value: 'Download' },
+            ],
+            files: [],
+            loading : false      
         }
     },
     methods: {
@@ -50,9 +97,28 @@ export default {
                 log(resp)
             })
         },
-        onFileAdded: function (files, event) {
+        onSubmitted: function (files, event) {
             log(files,event)
+        },
+        getDir: function () {
+            var that = this
+            that.files = []
+            that.loading = true
+            Axios({
+                url: that.$url + '/wdnmdir',
+                method: 'get'
+            }).then(resp => {
+                for (const f of resp.data) {
+                    f.Download = that.$url + '/uploads' + f.Path
+                    that.files.push(f)
+                }
+                that.loading = false
+                // that.files = resp.data
+            })
         }
     },
+    mounted: function () {
+        this.getDir()
+    }
 }
 </script>

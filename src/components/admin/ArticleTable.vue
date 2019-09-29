@@ -8,7 +8,6 @@
         <v-data-table
           :headers="headers"
           :items="articles"
-    
           sort
           item-key="aid">
           <template v-slot:items="props">

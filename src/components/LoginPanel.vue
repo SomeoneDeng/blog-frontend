@@ -12,7 +12,7 @@
                 <v-text-field label="User" v-model="username" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label="Password" v-model="password" type="password" required></v-text-field>
+                <v-text-field label="Password" v-model="password" type="password"  v-on:keyup.enter="login"  required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
