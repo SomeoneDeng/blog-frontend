@@ -2,7 +2,7 @@
     <v-layout column wrap style="padding-left:4px;padding-right:4px">
         <v-flex md12 xs12 sm12>
             <v-layout column >
-                <v-list-tile avatar @click="()=>{$router.push('/admin')}"> 
+                <v-list-tile avatar @click="toAdmin"> 
                     <v-list-tile-avatar :size="56">
                         <img src="../assets/logo.png">
                     </v-list-tile-avatar>
@@ -65,10 +65,11 @@ export default {
                 // {title : "https://space.bilibili.com/12057351",icon : 'link'},
             ],
             hitokoto:{},
-            kotoLoad: false
+            kotoLoad: false,
+            toAdminSign: 0
         }
     },
-    methods:{
+    methods: {
         getKoto: function () {
             var that = this
             Axios({
@@ -78,6 +79,14 @@ export default {
                 that.kotoLoad = true
                 that.hitokoto = resp.data.data
             })
+        },
+        toAdmin: function () {
+            if (this.toAdminSign < 5) {
+                this.toAdminSign += 1;
+            } else {
+                this.toAdminSign = 0;
+                this.$router.push('/admin')
+            }
         }
     },
     mounted: function () {
